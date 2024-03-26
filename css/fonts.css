@@ -73,7 +73,11 @@ b, strong {
 
 .subsection h1 {
     font-size: 75px;
-    color: var(--yellow-color);
+}
+
+.subsection h2 {
+    font-size: 50px;
+    color: #FFFFFF;
 }
 
 .remark-code, .remark-inline-code {

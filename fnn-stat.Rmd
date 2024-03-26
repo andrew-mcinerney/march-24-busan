@@ -1,10 +1,10 @@
 ---
-title: "Combining a smooth information criterion with neural networks"
+title: "A Statistical-Modelling Approach to Neural Networks"
 author: "Andrew McInerney"
 coauthor: " "
 institution: "University of Limerick"
-event: "LMU"
-date: '07 July 2023'
+event: "Pukyong National University"
+date: '27 March 2024'
 output:
   xaringan::moon_reader:
     self_contained: true
@@ -112,71 +112,6 @@ class: title-slide, left, bottom
 #### `r rmarkdown::metadata$event`, `r rmarkdown::metadata$date`
 
 ---
-
-# Where is Limerick?
-
---
-
-.pull-left[
-```{r, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics(c("img/limerick-map.png"))
-``` 
-]
-
-
---
-
-```{r, echo=FALSE, out.width="30%", fig.align="right"}
-knitr::include_graphics(c("img/limerick-city.jpg"))
-``` 
-
-
-```{r, echo=FALSE, out.width="30%", fig.align="right"}
-knitr::include_graphics(c("img/king-johns.jpg"))
-``` 
-
-
----
-# Limerick
-
---
-
-.pull-left[
-```{r, echo=FALSE, out.width="70%", fig.align="center"}
-knitr::include_graphics(c("img/hurling.jpg"))
-``` 
-
-```{r, echo=FALSE, out.width="40%", fig.align="center"}
-knitr::include_graphics(c("img/colmcille.png"))
-``` 
-
-]
-
---
-
-.pull-right[
-```{r, echo=FALSE, out.width="85%", fig.align="center"}
-knitr::include_graphics(c("img/dolores.jpg"))
-``` 
-]
-
----
-# Univeristy of Limerick
-
---
-
-.pull-left[
-```{r, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics(c("img/ul1.jpeg"))
-``` 
-]
---
-.pull-right[
-```{r, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics(c("img/ul2.jpg"))
-``` 
-]
----
 # Background
 
 --
@@ -196,6 +131,463 @@ knitr::include_graphics(c("img/crt-logo.jpg"))
 knitr::include_graphics(c("img/packages.png"))
 ``` 
 
+
+---
+
+# Agenda
+
+--
+
+- Introduction
+
+--
+
+- Model Selection
+
+--
+
+  - Stepwise Selection
+  
+--
+
+  - Penalised Selection
+
+--
+ 
+- Model Interpretation
+
+--
+
+Slides: [bit.ly/rss-fnn-stat](https://bit.ly/rss-fnn-stat)  
+
+
+---
+class: inverse1 middle center subsection
+# Introduction
+
+---
+
+# Background
+
+--
+
+Neural networks originated from attempts to model the human brain.
+
+<br>
+
+--
+
+Early influential papers:
+
+--
+
+-  McCulloch and Pitts (1943)
+
+--
+
+-  Rosenblatt (1958)
+
+--
+
+-  Rumelhart, Hinton and Williams (1986)
+
+
+
+---
+
+# Background
+
+Interest within the statistics community in the late 1980s and early 1990s.
+
+--
+
+<br>
+
+Comprehensive reviews provided by White (1989), Ripley (1993), Cheng and Titterington (1994).
+
+--
+
+<br>
+
+However, majority of research took place outside the field of statistics
+(Breiman, 2001; Hooker and Mentch, 2021).
+
+
+---
+
+# Background
+
+Renewed interest in merging statistical models and neural networks.
+
+--
+
+
+From a statistical viewpoint:
+
+--
+
+
+-  Distributional regression (Rugamer et al., 2020, 2021).
+
+--
+
+-  Mixed modelling (Tran et al., 2020).
+
+--
+
+From a machine-learning viewpoint:
+
+--
+
+- Neural Additive Models (Agarwal et al., 2020)
+
+
+---
+
+
+# Feedforward Neural Networks 
+
+--
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<!-- <img src="img/fnn-1.png" -->
+<!--      width="800px" height="350px" -->
+<!--      style="position:absolute; right:500px; top:220px;"> -->
+
+<br>
+
+
+--
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq1.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq2.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq3.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq4.png")
+```  
+]
+
+---
+count: false
+# Feedforward Neural Networks 
+
+
+.left-column[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+```
+]
+
+<br>
+
+
+.right-column[ 
+```{r, echo=FALSE, out.width="95%", out.height="100%", fig.align="right"}
+knitr::include_graphics("img/nneq5.png")
+```  
+]
+
+
+---
+
+# Data Application 
+
+--
+
+### Insurance Data (Kaggle)
+
+--
+
+1,338 beneficiaries enrolled in an insurance plan  
+
+--
+
+ 
+Response:  
+`charges`   
+
+--
+
+6 Explanatory Variables:
+
+`age,` `sex,` `bmi,` `children,` `smoker,` `region` 
+
+
+---
+class: inverse1 middle center subsection
+# Model Selection
+
+
+---
+class: inverse1 middle center subsection
+## Stepwise Selection
+
+---
+# Model Selection
+
+```{r, echo=FALSE, out.width="65%", fig.align="center"}
+knitr::include_graphics("img/FNN-ms.png")
+``` 
+
+---
+count: false
+# Model Selection
+
+
+
+```{r, echo=FALSE, out.width="65%", fig.align="center"}
+knitr::include_graphics("img/FNN-vs.png")
+``` 
+
+---
+count: false
+# Model Selection
+
+
+
+```{r, echo=FALSE, out.width="65%", fig.align="center"}
+knitr::include_graphics("img/FNN-vsmc.png")
+``` 
+
+---
+# Proposed Approach
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/FNN1.png")
+``` 
+]
+--
+.pull-right[
+Three phases for model selection:
+
+{{content}}
+]
+
+--
+
+1. Hidden-node selection
+{{content}}
+
+
+
+--
+
+2. Input-node selection
+{{content}}
+
+--
+
+3. Fine tuning
+{{content}}
+
+---
+# Proposed Approach
+
+--
+.center[
+<figcaption>Hidden Node Selection</figcaption>
+<img src="img/hidden-node-2.png" height="125px"/>
+]
+--
+.center[
+<figcaption>Input Node Selection</figcaption>
+<img src="img/input-node-2.png" height="125px"/>
+]
+--
+.center[
+<figcaption>Fine Tune</figcaption>
+<img src="img/fine-tune-2.png" height="125px"/>
+]
+---
+
+# Objective Function
+
+--
+
+- Machine Learning:
+
+--
+
+$$
+\begin{equation}
+\text{Out-of-Sample MSE} = \frac{1}{n_\text{val}}\sum_{i=1}^{n_\text{val}} (y_i - NN(x_i))^2
+\end{equation}
+$$
+
+
+--
+
+- Proposed:
+
+--
+
+
+$$
+\begin{equation}
+\text{BIC} = -2\ell(\hat{\theta}) + \log(n)(K + 1),
+\end{equation}
+$$
+
+--
+
+$$
+\begin{equation}
+K = (p+2)q+1
+\end{equation}
+$$
+
+---
+
+# Simulation Setup
+
+
+.pull-left[
+<br>
+
+
+True Model: $p = 3$, $q = 3$
+
+]
+
+---
+count: false
+# Simulation Setup
+
+
+.pull-left[
+<br>
+
+
+True Model: $p = 3$, $q = 3$
+
+
+<br>
+
+No. unimportant inputs: $10$
+
+
+]
+
+
+
+---
+count: false
+# Simulation Setup
+
+
+.pull-left[
+<br>
+
+
+True Model: $p = 3$, $q = 3$
+
+
+<br>
+
+No. unimportant inputs: $10$
+
+
+<br>
+
+Max no. hidden nodes: $10$
+
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/simFNN.png")
+``` 
+]
+
+---
+
+# Simulation Results: Approach
+
+--
+
+```{r, echo=FALSE, out.width="65%", fig.align="center"}
+knitr::include_graphics("img/table-sim-approach.png")
+``` 
+
+---
+# Simulation Results: Objective Function
+
+--
+
+```{r, echo=FALSE, out.width="50%", fig.align="center"}
+knitr::include_graphics("img/table-sim-objfun.png")
+``` 
+
+--
+```{r, echo=FALSE, out.width="70%", fig.align="center"}
+knitr::include_graphics("img/table-sim-metrics.png")
+```
 
 ---
 class: selectnn-slide
@@ -226,168 +618,76 @@ summary(nn)
 cat(c("[...]", capture.output(summary(nn))[c(4:7, 10:14)], "[...]"), sep = "\n") 
 ```
 
----
 
-class: interpretnn-slide
-# Interpreting FNNs
-
-Extend packages: **nnet**, **neuralnet**, **keras**, **torch** 
-
-*  Significance testing
-
-*  Covariate-effect plots 
 
 ---
+class: inverse1 middle center subsection
+## Penalised Selection
 
-class: interpretnn-slide
-# Insurance: Model Summary 
-
-
-```{r, message = FALSE, eval = FALSE, tidy = FALSE}
-intnn <- interpretnn(nn)  
-summary(intnn)
-```
-
---
-
-```{r summst, echo = FALSE, cache = TRUE, class.output = "bg-primary"}
-s <- summary(intnn, wald_single_par = TRUE)$coefdf
-s[, 5] <- round(s[, 5], 4)
-
-
-cat(c(capture.output(summary(intnn))[9],
-      capture.output(print(s[, c(1, 7, 4, 5, 6)], row.names = FALSE)),
-      capture.output(summary(intnn))[20:21])
-    , sep = "\n") 
-
-```
 
 ---
-
-class: interpretnn-slide
-# Insurance: Model Summary 
-
-
-```{r, message = FALSE, eval = FALSE, tidy = FALSE}
-plotnn(intnn)
-```
+# Smooth Information Criterion
 
 --
-
-```{r, echo=FALSE, out.width="70%", fig.align="center"}
-knitr::include_graphics("img/insurance-plotnn.png")
-``` 
-
----
-
-class: interpretnn-slide
-# Insurance: Covariate Effects 
-
-
-```{r, eval = FALSE}
-plot(intnn, conf_int = TRUE, which = c(1, 4))
-```  
-
---
-
-.pull-left[ 
-```{r plot1, cache = TRUE, echo = FALSE, fig.height = 6}
-par(mar=c(5,6,4,2)+.1) 
-plot(intnn, which = 1, conf_int = TRUE, ylim = c(0, 0.5), cex.axis = 1.7,
-     cex.caption = 2.5, cex.lab = 2.2)
-```  
-]  
-
---
-
-.pull-right[ 
-```{r plot2, cache = TRUE, echo = FALSE, fig.height = 6}
-par(mar=c(5,6,4,2)+.1) 
-plot(intnn, which = 4, conf_int = TRUE, ylim = c(0, 0.5), cex.axis = 1.7,
-     cex.caption = 2.5, cex.lab = 2.2)
-```  
-] 
-
----
-# Current Work
-
---
-
-<br>
-
-.pull-left[
-
-```{r, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics(c("img/kevin-meadhbh.png"))
-``` 
-
-]
-
---
-
-
-.pull-right[
 
 ```{r, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics(c("img/sic-publication.png"))
 ``` 
 
-]
 
 ---
 # Smooth Information Criterion
 
 $$
- \text{IC} = -2\ell(\theta) + \lambda [\lVert \tilde\theta \rVert_0 + 1]
+ \text{BIC} = -2\ell(\theta) + \log(n) \left[ \sum_{j=1}^p |\beta_j|^0 + 1 \right]
 $$
 
-where $\lambda =  \log(n)$ for the BIC.
 
 --
 
-Rearrange as an IC-based penalized likelihood:
-
-$$\ell^{\text{IC}}(\theta) = \ell(\theta) - \frac{\log(n)}{2} [\lVert \tilde\theta \rVert_{0} + 1]$$
-
-
----
-# Smooth Information Criterion
-
-Introduce "smooth $L_0$ norm":
-
-
-$$\lVert \theta \rVert_{0, \epsilon} = \sum_{j=1}^p \phi_\epsilon (\theta_j)$$
-
 where
 
-$$
- \phi_\epsilon(\theta_j) = \frac{{\theta_j^2}}{\theta_j^2 + \epsilon^2}
-$$
+\begin{equation*}
+  \ell(\theta)= -\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-x_i^T\beta)^2
+\end{equation*}
+
+
 
 ---
 # Smooth Information Criterion
 
-```{r, echo=FALSE, out.width="80%", fig.align="center"}
-knitr::include_graphics(c("img/smooth-l0.png"))
+$$
+ \text{BIC} = -2\ell(\theta) + \log(n) \left[ \sum_{j=1}^p |\beta_j|^0 + 1 \right]
+$$
+
+
+--
+
+Introduce "smooth BIC":
+
+--
+
+$$
+ \text{SBIC} = -2\ell(\theta) + \log(n) \left[ \sum_{j=1}^p \frac{{\beta_j^2}}{\beta_j^2 + \epsilon^2} + 1 \right]
+$$
+
+
+---
+# Smooth Information Criterion
+
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics(c("img/smooth-l0.jpg"))
 ``` 
 
 
 ---
-# Motivation
-
---
-
-* Tuning parameter automatically selected in one step
-
-<br>
-
---
-
-* Computationally advantageous 
-
-
----
 # $\epsilon$-telescoping
+
+
+$$
+ \text{SBIC} = -2\ell(\theta) + \log(n) \left[ \sum_{j=1}^p \frac{{\beta_j^2}}{\beta_j^2 + \epsilon^2} + 1 \right]
+$$
+
 
 --
 
@@ -405,7 +705,7 @@ knitr::include_graphics(c("img/smooth-l0.png"))
 ---
 # R Package
 
-```{r, echo=FALSE, out.width="70%", fig.align="center"}
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics(c("img/smoothic.png"))
 ``` 
 
@@ -424,20 +724,37 @@ $$\text{NN}(X, \theta) = \phi_o \left[ \gamma_0+\sum_{k=1}^q \gamma_k \phi_h \le
 ---
 # Extending to Neural Networks
 
-We can then formulate a **smooth** BIC-based penalized likelihood:
-
---
-
-
-\begin{equation*}
-  \ell^{\text{SIC}}(\theta) = \ell(\theta) - \frac{\log(n)}{2} [\lVert \tilde\theta \rVert_{0, \epsilon} + q + 1],
-\end{equation*}
+<p style="font-size: 0.85em">
+$$
+ \text{SBIC} = -2\ell(\theta) + \log(n) \left[ \sum_{jk} \frac{\omega_{jk}^2}{\omega_{jk}^2 + \epsilon^2} + \sum_{k} \frac{\gamma_k^2}{\gamma_k^2 + \epsilon^2} + q + 1 \right]
+$$
+</p>
 
 --
 where
-\begin{equation*}
-  \ell(\theta)= -\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\text{NN}(x_i))^2
-\end{equation*}
+
+<p style="font-size: 1em">
+$$
+  \ell(\theta) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\text{NN}(x_i))^2
+$$
+</p>
+
+
+---
+# Simulation Setup
+
+
+```{r, echo=FALSE, out.width="50%", fig.align="center"}
+knitr::include_graphics(c("img/sim-setup.png"))
+``` 
+
+
+---
+# Results
+
+```{r, echo=FALSE, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/sim-single-results.png")
+``` 
 
 
 ---
@@ -445,39 +762,49 @@ where
 
 --
 
-The smooth approximation of the $L_0$ norm can be written for groups as 
-<!-- $$ -->
-<!--  \phi_\epsilon(\theta^{(g)}) = \lvert \theta^{ (g) } \rvert \frac{ {\lVert \theta^{ (g) } \rVert}_2^2}{ {\lVert \theta^{ (g) } \rVert}_2^2 + \epsilon^2}. -->
-<!-- $$ -->
+.pull-left[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics(c("img/input-group.png"))
+```
+]
+
+--
+Single penalty:
+
+\begin{equation*}
+ \frac{\omega_{jk}^2}{\omega_{jk}^2 + \epsilon^2}
+\end{equation*}
+
+--
+
+Group penalty:
 
 $$
- \text{card}(\theta) \times \phi_\epsilon(||\theta||_2^2) = \text{card}(\theta) \times \frac{||\theta||_2^2}{||\theta||_2^2 + \epsilon^2}. 
+ \text{card}(\omega_j) \times \frac{||\omega_j||_2^2}{||\omega_j||_2^2 + \epsilon^2} 
 $$
+
+
 
 
 ---
 class: inputgroup-slide
-# Group Sparisty
+# Group Sparsity
 
 ## Input-neuron penalization
 
-<!-- \begin{equation*} -->
-<!--   \ell^{\text{IN-SIC}}(\theta) = \ell(\theta) - \frac{\log(n)}{2} \left[\sum_{j=1}^{p} \lVert \omega_{j} \rVert_{0, \epsilon} + \lVert \tilde\gamma \rVert_{0, \epsilon} + q + 1\right], -->
-<!-- \end{equation*} -->
+<p style="font-size: 0.78em">
+$$
+ \text{IN-SBIC} = -2\ell(\theta) + \log(n) \left[ q \times \sum_{j}\frac{||\omega_j||_2^2}{||\omega_j||_2^2 + \epsilon^2} + \sum_{k} \frac{\gamma_k^2}{\gamma_k^2 + \epsilon^2} + q + 1 \right]
+$$
+</p>
 
-
-<font size="6">
-\begin{equation*}
-  \ell^{\text{IN-SIC}}(\theta) = \ell(\theta) - \frac{\log(n)}{2} \left[q \times \sum_{j=1}^p\big\Vert\Vert\omega_j\Vert_2^2\big\Vert_{0,\epsilon}  + \lVert \tilde\gamma \rVert_{0, \epsilon} + q + 1\right]
-\end{equation*}
-</font>
 where $\omega_{j} = (\omega_{j1},\omega_{j2},\dotsc,\omega_{jq})^T$ 
 
 
 
 ---
 class: hiddengroup-slide
-# Group Sparisty
+# Group Sparsity
 
 
 
@@ -485,57 +812,360 @@ class: hiddengroup-slide
 
 
 
-<!-- \begin{equation*} -->
-<!--   \ell^{\text{HN-SIC}}(\theta) = \ell(\theta) - \frac{\log(n)}{2} \left[\sum_{k=1}^{q} \lVert \theta^{(k)} \rVert_{0, \epsilon} + q + 1\right], -->
-<!-- \end{equation*} -->
+<p style="font-size: 0.78em">
+$$
+ \text{HN-SBIC} = -2\ell(\theta) + \log(n) \left[ (p + 1) \times \sum_{k}\frac{||\theta^{(k)}||_2^2}{||\theta^{(k)}||_2^2 + \epsilon^2} + q + 1 \right]
+$$
+</p>
 
-<font size="6">
-\begin{equation*}
-  \ell^{\text{HN-SIC}}(\theta) = \ell(\theta) - \frac{\log(n)}{2} \left[(p+1) \times \sum_{k=1}^q\big\Vert\Vert\theta^{(k)}\Vert_2^2\big\Vert_{0,\epsilon} + q + 1\right]
-\end{equation*}
-</font>
+
 where $\theta^{(k)} = (\omega_{1k},\omega_{2k},\dotsc,\omega_{pk}, \gamma_k)^T$
 
 
 ---
-# Combined Penalty
+# Simulation Setup
 
-* Implement a group penalty and the single-parameter penalty in one optimization procedure  
 
-* Start with group penalization and telescope through the $\epsilon$ values until some predefined value, $\tau$
-
-* Switch to single-parameter penalization for the remainder of the $\epsilon$ values
-
----
-# Approaches
-
-* Single-parameter penalization
-
-* Input-neuron penalization
-
-* Hidden-neuron penalization
-
-* Combined approaches (perform group penalization initially and then switch to single-parameter penalization)
-
----
-# Preliminary Simulation
-
-```{r, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics(c("img/nn-sim-plot.png"))
+```{r, echo=FALSE, out.width="50%", fig.align="center"}
+knitr::include_graphics(c("img/sim-setup.png"))
 ``` 
 
+
 ---
-# Preliminary Results
+# Results (IN-SBIC)
 
 ```{r, echo=FALSE, out.width="90%", fig.align="center"}
-knitr::include_graphics("img/prelim-results.png")
+knitr::include_graphics("img/sim-input-results.png")
 ``` 
+
+
+---
+# Data Application - Results
+
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/insurance.png")
+``` 
+
+
+---
+class: inverse1 middle center subsection
+# Model Interpretation
+
+
+
+---
+
+# R Implementation
+
+--
+
+Many packages available to fit neural networks in R.
+
+<br>
+--
+
+Some popular packages are:
+
+--
+
+-  `nnet`
+
+--
+
+-  `neuralnet`
+
+--
+
+-  `keras`
+
+--
+
+-  `torch`
+
+---
+
+# R Implementation: nnet
+
+--
+
+```{r nnet, echo = TRUE, eval = FALSE}
+library(nnet)
+nn <- nnet(charges ~ ., data = insurance, size = 2, maxit = 2000,
+           linout = TRUE)
+summary(nn)
+```
+
+--
+
+```{r nnetmodel, eval = TRUE, echo = FALSE, class.output = "bg-primary", cache=TRUE}
+cat(c(capture.output(summary(inn$nn))[-2], "[...]"),
+    sep = "\n")
+```
+
+
+---
+
+
+# Proposed Solution: interpretnn
+
+--
+
+.left-column[ 
+<br>
+```{r, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("img/interpretnn.png")
+``` 
+]
+
+--
+
+.right-column[
+<br>
+<br>
+.small[
+```{r, echo=TRUE, eval = FALSE}
+# install.packages("devtools")
+library(devtools)
+install_github("andrew-mcinerney/interpretnn")
+``` 
+]
+]
+
+---
+
+# Statistical Perspective
+
+--
+
+$$
+y_i = \text{NN}(x_i) + \varepsilon_i, 
+$$
+
+--
+
+where
+
+$$
+\varepsilon_i \sim N(0, \sigma^2)
+$$
+
+--
+
+$$
+\ell(\theta, \sigma^2)= -\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\text{NN}(x_i))^2
+$$
+
+--
+
+Achieve uncertainty quantification through $I_o(\hat{\theta})$
+<!-- --- -->
+
+<!-- # Uncertainty Quantification -->
+
+<!-- Then, as $n \to \infty$ -->
+
+<!-- $$ -->
+<!-- \hat{\theta} \sim N[\theta, \Sigma = \mathcal{I}(\theta)^{-1}] -->
+<!-- $$ -->
+
+<!-- -- -->
+
+<!-- Estimate $\Sigma$ using -->
+
+<!-- $$ -->
+<!-- \hat{\Sigma} = I_o(\hat{\theta})^{-1} -->
+<!-- $$ -->
+
+<!-- -- -->
+
+<!-- <br>   -->
+
+<!-- However, inverting $I_o(\hat{\theta})$ can be problematic in neural networks. -->
+<!-- --- -->
+
+<!-- --- -->
+<!-- # Redundancy -->
+
+<!-- -- -->
+
+<!-- Redundant hidden nodes can lead to issues of unidentifiability for some of the parameters (Fukumizu 1996). -->
+
+<!-- <br> -->
+
+<!-- -- -->
+
+<!-- Redundant hidden nodes $\implies$ Singular information matrix. -->
+
+<!-- <br> -->
+
+<!-- -- -->
+
+<!-- Trade-off between model flexibility and interpretability. -->
+
+
+---
+
+# Significance Testing
+
+--
+
+.pull-left[
+```{r, echo=FALSE, out.width="98.9%", fig.align="center"}
+knitr::include_graphics("img/fnn-1.jpg")
+``` 
+]
+
+---
+count: false
+# Significance Testing
+
+
+.pull-left[
+```{r, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("img/fnn2-1.jpg")
+``` 
+]
+
+--
+
+.pull-right[
+  Wald test:
+  
+  {{content}}
+  
+  ]
+
+--
+
+$$
+\begin{equation}
+ \omega_j = (\omega_{j1},\omega_{j2},\dotsc,\omega_{jq})^T
+\end{equation}
+$$
+{{content}}
+
+--
+
+$$
+\begin{equation}
+ H_0: \omega_j = 0
+\end{equation}
+$$
+{{content}}
+
+--
+
+$$
+\begin{equation}
+ (\hat{\omega}_{j} - \omega_j)^T\Sigma_{\hat{\omega}_{j}}^{-1}(\hat{\omega}_{j} - \omega_j) \overset{\mathcal{D}}{\longrightarrow} \chi^2_q
+\end{equation}
+$$
+{{content}}
+
+
+---
+
+
+# Insurance: Model Summary 
+
+
+```{r, message = FALSE, eval = FALSE, tidy = FALSE}
+intnn <- interpretnn(nn)  
+summary(intnn)
+```
+
+--
+
+```{r summst, echo = FALSE, cache = TRUE, class.output = "bg-primary"}
+s <- summary(intnn, wald_single_par = TRUE)$coefdf
+s[, 5] <- round(s[, 5], 4)
+
+
+cat(c(capture.output(summary(intnn))[9],
+      capture.output(print(s[, c(1, 7, 4, 5, 6)], row.names = FALSE)),
+      capture.output(summary(intnn))[20:21])
+    , sep = "\n")  
+
+```
+
+---
+
+
+# Insurance: Model Summary 
+
+
+```{r, message = FALSE, eval = FALSE, tidy = FALSE}
+plotnn(intnn)
+```
 
 --
 
 ```{r, echo=FALSE, out.width="90%", fig.align="center"}
-knitr::include_graphics("img/prelim-results-extra.png")
+knitr::include_graphics("img/plotnn-1.png")
 ``` 
+
+
+---
+
+# Covariate-Effect Plots
+
+--
+
+$$
+\begin{equation}
+ \widehat{\overline{\text{NN}}}_j(x) = \frac{1}{n}\sum_{i=1}^n \text{NN}(x_{i,1}, \ldots,x_{i,j-1},x, x_{i,j+1}, \ldots)
+\end{equation}
+$$
+
+--
+Covariate-effect plots of the following form:
+
+--
+
+$$
+\begin{equation}
+ \hat{\beta}_j(x,d) =\widehat{\overline{\text{NN}}}_j(x + d) -\widehat{\overline{\text{NN}}}_j(x)
+\end{equation}
+$$
+
+--
+
+Usually set $d = \text{SD}(x_j)$
+
+
+---
+
+# Insurance: Covariate Effects 
+
+
+```{r, eval = FALSE}
+plot(intnn, conf_int = TRUE, which = c(1, 4))
+```  
+
+--
+
+.pull-left[ 
+```{r plot1, cache = TRUE, echo = FALSE, fig.height = 6}
+par(mar=c(5,6,4,2)+.1) 
+plot(intnn, which = 1, xaxt = "n", conf_int = TRUE, ylim = c(0, 0.5), cex.axis = 1.7,
+     cex.caption = 2.5, cex.lab = 2.2)
+rug(jitter(intnn$X$age, factor = 2.5))
+axis(1, at= c(-1.5, -1, -0.5, 0, 0.5, 1, 1.5),
+     labels=c(17.5, 25, 32.5, 40, 47.5, 55, 62.5), cex.axis = 1.7)
+```  
+]  
+
+--
+
+.pull-right[ 
+```{r plot2, cache = TRUE, echo = FALSE, fig.height = 6}
+par(mar=c(5,6,4,2)+.1) 
+plot(intnn, which = 4, xaxt = "n", conf_int = TRUE, ylim = c(0, 0.5), cex.axis = 1.7,
+     cex.caption = 2.5, cex.lab = 2.2)
+rug(jitter(intnn$X$children))
+axis(1, at= c(-0.90827, -0.0787, 0.751, 1.58, 2.41, 3.24), labels=0:5, cex.axis = 1.7)
+```  
+] 
 ---
 class: bigger
 # References
